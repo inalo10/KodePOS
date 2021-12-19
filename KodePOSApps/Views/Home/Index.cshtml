@@ -1,0 +1,212 @@
+﻿@model KodePOSApps.ViewModels.KodePOS
+
+@{
+    ViewBag.Title = "Kode Pos";
+}
+<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">book Delete Confirmation</h4>
+            </div>
+            <div class="modal-body">
+                Are you Sure!!! You want to delete this data?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn blue" id="btnContinueDelete">Continue</button>
+                <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id='myModal' class='modal modal-black'>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id='myModalDialog'></div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Index", "Home"))
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3>Kode POS</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-5 col-lg-3 col-12">
+                                    <div class="form-group">
+                                        @Html.Label("Propinsi")
+                                        @Html.DropDownListFor(model => model.FilterKodePOS.FilterPropinsi, ViewBag.PropinsiList as SelectList, "-- Select Propinsi --", new { @id = "Propinsi", @onchange = "KebupatenGen(this);", @class = "form-control input-sm" })
+                                    </div>
+                                </div>
+                                <div class="col-md-5 col-lg-3 col-12">
+                                    <div class="form-group">
+                                        @Html.Label("Kabupaten")
+                                        @Html.DropDownListFor(model => model.FilterKodePOS.FilterKabupaten, ViewBag.KabupatenList as SelectList, "-- Select Kabupaten --", new { @id = "KabupatenbyPropinsi", @class = "form-control input-sm" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="submit" value="Search" class="btn btn-success" onclick="loading();" />
+                                        <input type="button" value="Reset" class="btn btn-info" onclick="resetAll();" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <a href="/Home/InputKodePOS?id=0" class="btn btn-success"><i class='fa fa-plus-circle'></i> New</a>
+                                        <table class="table table-striped table-bordered table-hover" id="KodePOSTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>No. Kode POS</th>
+                                                    <th>Kelurahan</th>
+                                                    <th>Kecamatan</th>
+                                                    <th>Kabupaten / Kota</th>
+                                                    <th>Propinsi</th>
+                                                    <th style="width:120px;"></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        }
+        <!-- /.box -->
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    function loading() {
+        waitingDialog.show('Please wait...');
+    }
+    $(document).ready(function () {
+        waitingDialog.hide();
+
+        $("#checkAll").click(function () {
+            $('.unmodified').children('input:checkbox').not(this).prop('checked', this.checked);
+        });
+
+        $(".checkAll").each(function () {
+            var that = $(this);
+            that.click(function () {
+                that.closest('table').find('.unmodified').children('input:checkbox').not(this).prop('checked', this.checked);
+            });
+        });
+
+        var status = @ViewBag.Status;
+
+        if (status == "1") {
+            $.notify({
+                // options
+                message: 'Success @ViewBag.Message'
+            }, {
+                // settings
+                type: 'success'
+            });
+        } else if (status == '2') {
+            $.notify({
+                // options
+                message: 'Failed @ViewBag.Message'
+            }, {
+                // settings
+                type: 'danger'
+            });
+        }
+    });
+
+    function resetAll() {
+        $("#Propinsi").val('');
+        $("#KabupatenbyPropinsi").val('');
+
+        $('.checkBox').children('input:checkbox').not(this.checked).prop('checked', false);
+    }
+
+    function KebupatenGen() {
+        var targetID = "KabupatenbyPropinsi";
+        var targetLabel = "Kabupaten";
+
+        var sourceID = $("#Propinsi");
+        var id = {};
+        id["SourceID"] = sourceID.val();
+
+        if (sourceID != "") {
+            var urlGet = "/Home/KabupatenbyPropinsiJSON"
+            generateDropDown(urlGet, id, targetID, targetLabel);
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#KodePOSTable").dataTable({
+            "bServerSide": true, //make server side processing to true
+            "sAjaxSource": "/Home/GetData", //url of the Ajax source,i.e. web api method
+            "sAjaxDataProp": "aaData", // data property of the returned ajax which contains table data
+            "bProcessing": true,
+            "bLengthChange": false,
+            "sPaginationType": "full_numbers",//pagination type
+            "aoColumns": [
+                { "mData": "NoKodePOS" },
+                { "mData": "Kelurahan" },
+                { "mData": "Kecamatan" },
+                { "mData": "Kabupaten" },
+                { "mData": "Propinsi" },
+                {
+                    "mData": function (o) {
+                        return "<a href='/Home/InputKodePOS?id=" + o.IDKodePOS + "' title='Edit' class='btn btn-sm btn-warning'><i class='fa fa-pencil-square'></i> Edit</a> <a href='#' title='Delete' class='btn btn-sm btn-danger' onclick=DeleteData('" + o.IDKodePOS + "');><i class='fa fa-pencil-square'></i> Delete</a>";
+                    }
+                },
+            ]
+        });
+    });
+
+    function DeleteData(IDKodePOS) {
+    if (confirm("Are you sure you want to delete ...?")) {
+        Delete(IDKodePOS);
+    } else {
+        return false;
+        }
+    }
+
+    function Delete(IDKodePOS) {
+    var url = '@Url.Content("~/")' + "Home/DeleteKodePOS";
+
+    $.post(url, { id: IDKodePOS }, function(data) {
+        if (data) {
+            oTable = $('#KodePOSTable').DataTable();
+            oTable.draw();
+        } else {
+            alert("Something Went Wrong!");
+        }
+    });
+    }
+</script>

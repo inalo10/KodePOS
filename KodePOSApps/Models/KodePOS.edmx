@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KodePOSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="T_Master_KodePOS">
+          <Key>
+            <PropertyRef Name="IDKodePOS" />
+          </Key>
+          <Property Name="IDKodePOS" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NoKodePOS" Type="int" Nullable="false" />
+          <Property Name="Kelurahan" Type="varchar" MaxLength="500" />
+          <Property Name="Kecamatan" Type="varchar" MaxLength="500" />
+          <Property Name="Jenis" Type="varchar" MaxLength="500" />
+          <Property Name="Kabupaten" Type="varchar" MaxLength="500" />
+          <Property Name="Propinsi" Type="varchar" MaxLength="500" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifyDate" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="KodePOSModelStoreContainer">
+          <EntitySet Name="T_Master_KodePOS" EntityType="Self.T_Master_KodePOS" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KodePOSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="KodePOSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="T_Master_KodePOS" EntityType="KodePOSModel.T_Master_KodePOS" />
+        </EntityContainer>
+        <EntityType Name="T_Master_KodePOS">
+          <Key>
+            <PropertyRef Name="IDKodePOS" />
+          </Key>
+          <Property Name="IDKodePOS" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoKodePOS" Type="Int32" Nullable="false" />
+          <Property Name="Kelurahan" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Kecamatan" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Jenis" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Kabupaten" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Propinsi" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KodePOSModelStoreContainer" CdmEntityContainer="KodePOSEntities">
+          <EntitySetMapping Name="T_Master_KodePOS">
+            <EntityTypeMapping TypeName="KodePOSModel.T_Master_KodePOS">
+              <MappingFragment StoreEntitySet="T_Master_KodePOS">
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Propinsi" ColumnName="Propinsi" />
+                <ScalarProperty Name="Kabupaten" ColumnName="Kabupaten" />
+                <ScalarProperty Name="Jenis" ColumnName="Jenis" />
+                <ScalarProperty Name="Kecamatan" ColumnName="Kecamatan" />
+                <ScalarProperty Name="Kelurahan" ColumnName="Kelurahan" />
+                <ScalarProperty Name="NoKodePOS" ColumnName="NoKodePOS" />
+                <ScalarProperty Name="IDKodePOS" ColumnName="IDKodePOS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

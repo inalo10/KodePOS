@@ -1,0 +1,32 @@
+﻿@model KodePOSApps.ViewModels.KodePOS
+
+<div>
+    <div class="modal-header">
+        <h3></h3>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    </div>
+    <br />
+    <div class="modal-body">
+        @using (Html.BeginForm(Model.URLAction, "Home", FormMethod.Post))
+        {
+            @Html.HiddenFor(model => model.KodePOSInput.IDKodePOS)
+            @Html.HiddenFor(model => model.idDeleteArray)
+            @Html.HiddenFor(model => model.idDeleteString)
+            <div>
+                <h4>@Model.DeleteMessage </h4>
+            </div>
+            <div style="width:45%;float:right">
+                <br />
+                <br />
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="submit" value="Yes" class="btn btn-primary" />
+                        <input type="button" value="No" class="btn btn-danger" data-dismiss="modal" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

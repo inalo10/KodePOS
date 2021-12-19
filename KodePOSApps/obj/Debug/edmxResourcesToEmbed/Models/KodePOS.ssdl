@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KodePOSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="T_Master_KodePOS">
+    <Key>
+      <PropertyRef Name="IDKodePOS" />
+    </Key>
+    <Property Name="IDKodePOS" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoKodePOS" Type="int" Nullable="false" />
+    <Property Name="Kelurahan" Type="varchar" MaxLength="500" />
+    <Property Name="Kecamatan" Type="varchar" MaxLength="500" />
+    <Property Name="Jenis" Type="varchar" MaxLength="500" />
+    <Property Name="Kabupaten" Type="varchar" MaxLength="500" />
+    <Property Name="Propinsi" Type="varchar" MaxLength="500" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifyDate" Type="datetime" />
+  </EntityType>
+  <EntityContainer Name="KodePOSModelStoreContainer">
+    <EntitySet Name="T_Master_KodePOS" EntityType="Self.T_Master_KodePOS" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

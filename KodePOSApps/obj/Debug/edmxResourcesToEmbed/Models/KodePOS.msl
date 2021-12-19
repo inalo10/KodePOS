@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="KodePOSModelStoreContainer" CdmEntityContainer="KodePOSEntities">
+    <EntitySetMapping Name="T_Master_KodePOS">
+      <EntityTypeMapping TypeName="KodePOSModel.T_Master_KodePOS">
+        <MappingFragment StoreEntitySet="T_Master_KodePOS">
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Propinsi" ColumnName="Propinsi" />
+          <ScalarProperty Name="Kabupaten" ColumnName="Kabupaten" />
+          <ScalarProperty Name="Jenis" ColumnName="Jenis" />
+          <ScalarProperty Name="Kecamatan" ColumnName="Kecamatan" />
+          <ScalarProperty Name="Kelurahan" ColumnName="Kelurahan" />
+          <ScalarProperty Name="NoKodePOS" ColumnName="NoKodePOS" />
+          <ScalarProperty Name="IDKodePOS" ColumnName="IDKodePOS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
