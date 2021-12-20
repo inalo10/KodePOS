@@ -1,5 +1,5 @@
 <div id="top"></div>
-<b>KodePOSApps</b>
+<h2>KodePOSApps</h2>
 
 
 ### Built With
